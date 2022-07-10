@@ -11,14 +11,14 @@ export class albumServices extends RESTDataSource {
     }
 
     willSendRequest(request: RequestOptions) {
-        if (this.context.autorization) {
-            if (!this.context.autorization.includes('Bearer')) {
+        if (this.context.authorization) {
+            if (!this.context.authorization.includes('Bearer')) {
                 request.headers.set(
                     'Authorization',
-                    `Bearer ${this.context.autorization}`
+                    `Bearer ${this.context.authorization}`
                 )
             } else {
-                request.headers.set('Authorization', this.context.autorization)
+                request.headers.set('Authorization', this.context.authorization)
             }
         }
     }
@@ -73,7 +73,9 @@ export class albumServices extends RESTDataSource {
 
     async createAlbum(obj?: Album) {
         try {
-            return await this.post('/', JSON.stringify(obj))
+            const ret = await this.post('', obj)
+            ret.id = ret._id
+            return ret
         } catch (error) {
             console.log('Post album problem')
             return 'Post album problem'
@@ -82,7 +84,7 @@ export class albumServices extends RESTDataSource {
 
     async updateAlbum(id: string, obj?: Album) {
         try {
-            return await this.put(`/${id}`, JSON.stringify(obj))
+            return await this.put(`/${id}`, obj)
         } catch (error) {
             console.log('Update album problem')
             return 'Update album problem'

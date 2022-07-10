@@ -10,15 +10,15 @@ import {
 } from 'nexus'
 import { Track } from '../schemas/tracks.schema.js'
 
-const queryTrack = queryField('track', {
-    type: nullable(Track),
+const queryTrack = queryField('tracks', {
+    type: nullable(list(nullable(Track))),
     resolve: async (root, args, context) => {
         return context.dataSources.trackAPI.getTrack()
     },
 })
 
-const queryTracks = queryField('tracks', {
-    type: nullable(list(nullable(Track))),
+const queryTracks = queryField('track', {
+    type: nullable(Track),
     args: {
         id: nonNull(idArg()),
     },

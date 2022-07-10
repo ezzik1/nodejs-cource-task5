@@ -9,15 +9,15 @@ import {
 } from 'nexus'
 import { Band } from '../schemas/bands.schema.js'
 
-const queryBand = queryField('band', {
-    type: nullable(Band),
+const queryBand = queryField('bands', {
+    type: nullable(list(nullable(Band))),
     resolve: async (root, args, context) => {
         return context.dataSources.bandAPI.getBand()
     },
 })
 
-const queryBands = queryField('bands', {
-    type: nullable(list(nullable(Band))),
+const queryBands = queryField('band', {
+    type: nullable(Band),
     args: {
         id: nonNull(idArg()),
     },

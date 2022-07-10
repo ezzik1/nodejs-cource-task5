@@ -11,14 +11,14 @@ export class favoriteServices extends RESTDataSource {
     }
 
     willSendRequest(request: RequestOptions) {
-        if (this.context.autorization) {
-            if (!this.context.autorization.includes('Bearer')) {
+        if (this.context.authorization) {
+            if (!this.context.authorization.includes('Bearer')) {
                 request.headers.set(
                     'Authorization',
-                    `Bearer ${this.context.autorization}`
+                    `Bearer ${this.context.authorization}`
                 )
             } else {
-                request.headers.set('Authorization', this.context.autorization)
+                request.headers.set('Authorization', this.context.authorization)
             }
         }
     }
@@ -46,7 +46,7 @@ export class favoriteServices extends RESTDataSource {
             type: 'track',
             id: id,
         }
-        return await this.post('/add', JSON.stringify(obj))
+        return await this.put('/add', obj)
     }
 
     async addBand(id: string) {
@@ -54,7 +54,7 @@ export class favoriteServices extends RESTDataSource {
             type: 'band',
             id: id,
         }
-        return await this.post('/add', JSON.stringify(obj))
+        return await this.put('/add', obj)
     }
 
     async addArtist(id: string) {
@@ -62,7 +62,7 @@ export class favoriteServices extends RESTDataSource {
             type: 'artist',
             id: id,
         }
-        return await this.post('/add', JSON.stringify(obj))
+        return await this.put('/add', obj)
     }
 
     async addGenre(id: string) {
@@ -70,7 +70,7 @@ export class favoriteServices extends RESTDataSource {
             type: 'genre',
             id: id,
         }
-        return await this.post('/add', JSON.stringify(obj))
+        return await this.put('/add', obj)
     }
 
     async bandResolver(ids: string[]) {

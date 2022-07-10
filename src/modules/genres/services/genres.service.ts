@@ -8,7 +8,6 @@ export class genresServices extends RESTDataSource {
     }
 
     willSendRequest(request: RequestOptions) {
-        console.log(this.httpCache, this.context.Authorization)
         if (this.context.authorization) {
             if (!this.context.authorization.includes('Bearer')) {
                 request.headers.set(
@@ -44,9 +43,7 @@ export class genresServices extends RESTDataSource {
 
     async createGenre(obj?: Genre) {
         try {
-            console.log(obj)
-            const ret = await this.post('/', obj)
-            console.log(ret)
+            return await this.post('', obj)
         } catch (error) {
             console.log('Post genre problem')
             return 'Post genre problem'

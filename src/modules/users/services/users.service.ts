@@ -8,14 +8,14 @@ export class userServices extends RESTDataSource {
     }
 
     willSendRequest(request: RequestOptions) {
-        if (this.context.autorization) {
-            if (!this.context.autorization.includes('Bearer')) {
+        if (this.context.authorization) {
+            if (!this.context.authorization.includes('Bearer')) {
                 request.headers.set(
                     'Authorization',
-                    `Bearer ${this.context.autorization}`
+                    `Bearer ${this.context.authorization}`
                 )
             } else {
-                request.headers.set('Authorization', this.context.autorization)
+                request.headers.set('Authorization', this.context.authorization)
             }
         }
     }

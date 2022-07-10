@@ -11,14 +11,14 @@ import {
 import { Album } from '../schemas/albums.schema.js'
 
 const queryAlbums = queryField('albums', {
-    type: nullable(Album),
+    type: nullable(list(nullable(Album))),
     resolve: async (root, args, context) => {
         return context.dataSources.albumAPI.getAlbum()
     },
 })
 
 const queryAlbum = queryField('album', {
-    type: nullable(list(nullable(Album))),
+    type: nullable(Album),
     args: {
         id: nonNull(idArg()),
     },

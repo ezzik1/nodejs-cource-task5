@@ -8,14 +8,14 @@ export class tracksServices extends RESTDataSource {
     }
 
     willSendRequest(request: RequestOptions) {
-        if (this.context.autorization) {
-            if (!this.context.autorization.includes('Bearer')) {
+        if (this.context.authorization) {
+            if (!this.context.authorization.includes('Bearer')) {
                 request.headers.set(
                     'Authorization',
-                    `Bearer ${this.context.autorization}`
+                    `Bearer ${this.context.authorization}`
                 )
             } else {
-                request.headers.set('Authorization', this.context.autorization)
+                request.headers.set('Authorization', this.context.authorization)
             }
         }
     }
@@ -79,7 +79,9 @@ export class tracksServices extends RESTDataSource {
 
     async createTrack(obj?: Track) {
         try {
-            return await this.post('/', JSON.stringify(obj))
+            const ret = await this.post('', obj)
+            ret.id = ret._id
+            return ret
         } catch (error) {
             console.log('Post track problem')
             return 'Post track problem'
@@ -88,7 +90,7 @@ export class tracksServices extends RESTDataSource {
 
     async updateTrack(id: string, obj?: Track) {
         try {
-            return await this.put(`/${id}`, JSON.stringify(obj))
+            return await this.put(`/${id}`, obj)
         } catch (error) {
             console.log('Update track problem')
             return 'Update track problem'

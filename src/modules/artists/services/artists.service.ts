@@ -10,14 +10,14 @@ export class artistServices extends RESTDataSource {
     }
 
     willSendRequest(request: RequestOptions) {
-        if (this.context.autorization) {
-            if (!this.context.autorization.includes('Bearer')) {
+        if (this.context.authorization) {
+            if (!this.context.authorization.includes('Bearer')) {
                 request.headers.set(
                     'Authorization',
-                    `Bearer ${this.context.autorization}`
+                    `Bearer ${this.context.authorization}`
                 )
             } else {
-                request.headers.set('Authorization', this.context.autorization)
+                request.headers.set('Authorization', this.context.authorization)
             }
         }
     }
@@ -56,7 +56,7 @@ export class artistServices extends RESTDataSource {
 
     async createArtist(obj?: Artist) {
         try {
-            return await this.post('/', JSON.stringify(obj))
+            return await this.post('', obj)
         } catch (error) {
             console.log('Post artist problem')
             return 'Post artist problem'
@@ -65,7 +65,7 @@ export class artistServices extends RESTDataSource {
 
     async updateArtist(id: string, obj?: Artist) {
         try {
-            return await this.put(`/${id}`, JSON.stringify(obj))
+            return await this.put(`/${id}`, obj)
         } catch (error) {
             console.log('Update artist problem')
             return 'Update artist problem'

@@ -9,14 +9,14 @@ export class bandServices extends RESTDataSource {
     }
 
     willSendRequest(request: RequestOptions) {
-        if (this.context.autorization) {
-            if (!this.context.autorization.includes('Bearer')) {
+        if (this.context.authorization) {
+            if (!this.context.authorization.includes('Bearer')) {
                 request.headers.set(
                     'Authorization',
-                    `Bearer ${this.context.autorization}`
+                    `Bearer ${this.context.authorization}`
                 )
             } else {
-                request.headers.set('Authorization', this.context.autorization)
+                request.headers.set('Authorization', this.context.authorization)
             }
         }
     }
@@ -57,7 +57,7 @@ export class bandServices extends RESTDataSource {
 
     async createBand(obj?: Band) {
         try {
-            return await this.post('/', JSON.stringify(obj))
+            return await this.post('', obj)
         } catch (error) {
             console.log('Post band problem')
             return 'Post band problem'
@@ -66,7 +66,7 @@ export class bandServices extends RESTDataSource {
 
     async updateBand(id: string, obj?: Band) {
         try {
-            const ret = await this.put(`/${id}`, JSON.stringify(obj))
+            const ret = await this.put(`/${id}`, obj)
             ret.id = ret._id
             return ret
         } catch (error) {

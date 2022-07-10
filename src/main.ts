@@ -29,8 +29,8 @@ async function startApolloServer() {
             }
         },
         context: ({ req }) => {
-            const token = req.headers.autorization || ''
-            return token
+            const token = req.headers.authorization
+            return { authorization: token }
         },
         plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
     })
