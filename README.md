@@ -50,8 +50,49 @@
 * addBandToFavourites
 * addArtistToFavourites
 * addGenreToFavourites
-* removeTrackToFavourites
-* removeBandToFavourites
-* removeArtistToFavourites
-* removeGenreToFavourites
 </details>
+
+<details>
+   <summary> Example Query </summary>
+
+```graphql
+query {
+   jwt(email: "test@test.com", password: "123123qwe")
+}
+```
+   
+```Json
+{
+   "data": {
+      "jwt": "token"
+   }
+}
+```
+
+</details>
+
+<details>
+   <summary> Example Mutation </summary>
+
+```graphql
+mutation {
+   createGenre(name: "test", description: "random") {
+      name
+      description
+   }
+}
+```
+   
+```Json
+{
+   "data": {
+      "createGenre": {
+         "name": "test"
+         "description": "random"
+      }
+   }
+}
+```
+
+</details>
+
