@@ -1,5 +1,5 @@
 ## Install Application
-- git clone https://github.com/Nick1091/Graphql-Service.git
+- git clone https://github.com/ezzik1/nodejs-cource-task5.git
 - checkout develop branch
 - npm install
 - npm run start
